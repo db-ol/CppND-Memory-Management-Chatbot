@@ -11,6 +11,8 @@
 // constructor WITHOUT memory allocation
 ChatBot::ChatBot()
 {
+    std::cout << "ChatBot Constructor WITHOUT memory allocation" << std::endl;
+
     // invalidate data handles
     _image = nullptr;
     _chatLogic = nullptr;
@@ -44,7 +46,65 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+ChatBot::ChatBot(const ChatBot& chatbot)
+{
+    std::cout << "ChatBot Copy Constructor" << std::endl;
 
+    _chatLogic = chatbot._chatLogic;
+    _rootNode = chatbot._rootNode;
+    _currentNode = chatbot._currentNode;
+
+    _image = chatbot._image;
+}
+
+ChatBot::ChatBot(ChatBot&& chatbot)
+{
+    std::cout << "ChatBot Move Constructor" << std::endl;
+
+    _chatLogic = chatbot._chatLogic;
+    _rootNode = chatbot._rootNode;
+    _currentNode = chatbot._currentNode;
+
+    _image = chatbot._image;
+
+    chatbot._chatLogic = nullptr;
+    chatbot._rootNode = nullptr;
+    chatbot._currentNode = nullptr;
+
+    chatbot._image = nullptr;
+}
+
+ChatBot& ChatBot::operator=(const ChatBot& chatbot)
+{
+    std::cout << "ChatBot Copy Assignment Operator" << std::endl;
+
+    _chatLogic = chatbot._chatLogic;
+    _rootNode = chatbot._rootNode;
+    _currentNode = chatbot._currentNode;
+
+    _image = chatbot._image;
+
+    return *this;
+}
+
+ChatBot& ChatBot::operator=(ChatBot&& chatbot)
+{
+    std::cout << "ChatBot Move Assignment Operator" << std::endl;
+
+    _chatLogic = chatbot._chatLogic;
+    _rootNode = chatbot._rootNode;
+    _currentNode = chatbot._currentNode;
+
+    _image = chatbot._image;
+
+    chatbot._chatLogic = nullptr;
+    chatbot._rootNode = nullptr;
+    chatbot._currentNode = nullptr;
+
+    chatbot._image = nullptr;
+
+    return *this;
+}
 ////
 //// EOF STUDENT CODE
 
